@@ -13,7 +13,8 @@ import com.oceanbrasil.databinding.FragmentSecondBinding
  */
 class SecondFragment : Fragment() {
 
-private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentSecondBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -23,20 +24,19 @@ private var _binding: FragmentSecondBinding? = null
         savedInstanceState: Bundle?
     ): View {
 
-      _binding = FragmentSecondBinding.inflate(inflater, container, false)
-      return binding.root
+        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val nomeDigitado = arguments?.getString("NOME_DIGITADO")
+        binding.textviewSecond.text = nomeDigitado ?: "Nenhum nome Digitado"
+
         binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            findNavController().popBackStack()
         }
-    }
-override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
